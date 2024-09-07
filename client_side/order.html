@@ -1,0 +1,124 @@
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Your Order</h1>
+    <div id="orderDetails"></div>
+    <a href="index.html" id="returnLink">Return to Home Page</a>
+    <button id="proceedToSignUp">Proceed to Sign Up</button>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const orderDetailsDiv = document.getElementById('orderDetails');
+            const order = JSON.parse(localStorage.getItem('order'));
+            let totalAmount = 0;
+
+            order.forEach(product => {
+                const productTotal = product.price * product.quantity;
+                totalAmount += productTotal;
+
+                const productDiv = document.createElement('div');
+                productDiv.className = 'product';
+                productDiv.innerHTML = `
+                    <h2>${product.name}</h2>
+                    <img src="${product.imageUrl}" alt="${product.name}">
+                    <p>${product.description}</p>
+                    <p>Price: $${product.price}</p>
+                    <p>Quantity: ${product.quantity}</p>
+                    <p>Total: $${productTotal}</p>
+                `;
+                orderDetailsDiv.appendChild(productDiv);
+            });
+
+            const totalDiv = document.createElement('div');
+            totalDiv.className = 'total';
+            totalDiv.innerHTML = `<h2>Total Amount: $${totalAmount}</h2>`;
+            orderDetailsDiv.appendChild(totalDiv);
+
+            document.getElementById('proceedToSignUp').addEventListener('click', () => {
+                window.location.href = 'sign_up.html';
+            });
+        });
+    </script>
+</body>
+</html>
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Your Order</h1>
+    <div id="orderDetails"></div>
+    <a href="index.html" id="returnLink">Return to Home Page</a>
+    <button id="proceedToSignUp">Proceed to Sign Up</button>
+    <button id="downloadOrder">Download Order</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const orderDetailsDiv = document.getElementById('orderDetails');
+            const order = JSON.parse(localStorage.getItem('order'));
+            let totalAmount = 0;
+
+            order.forEach(product => {
+                const productTotal = product.price * product.quantity;
+                totalAmount += productTotal;
+
+                const productDiv = document.createElement('div');
+                productDiv.className = 'product';
+                productDiv.innerHTML = `
+                    <h2>${product.name}</h2>
+                    <img src="${product.imageUrl}" alt="${product.name}">
+                    <p>${product.description}</p>
+                    <p>Price: $${product.price}</p>
+                    <p>Quantity: ${product.quantity}</p>
+                    <p>Total: $${productTotal}</p>
+                `;
+                orderDetailsDiv.appendChild(productDiv);
+            });
+
+            const totalDiv = document.createElement('div');
+            totalDiv.className = 'total';
+            totalDiv.innerHTML = `<h2>Total Amount: $${totalAmount}</h2>`;
+            orderDetailsDiv.appendChild(totalDiv);
+
+            document.getElementById('proceedToSignUp').addEventListener('click', () => {
+                window.location.href = 'sign_up.html';
+            });
+
+            document.getElementById('downloadOrder').addEventListener('click', () => {
+                const orderPageContent = `
+                    <html>
+                    <head>
+                        <title>Your Order</title>
+                        <style>
+                            body { font-family: Arial, sans-serif; }
+                            .product { margin-bottom: 20px; }
+                            .total { margin-top: 20px; }
+                        </style>
+                    </head>
+                    <body>
+                        <h1>Your Order</h1>
+                        ${orderDetailsDiv.innerHTML}
+                    </body>
+                    </html>
+                `;
+                const blob = new Blob([orderPageContent], { type: 'text/html' });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = 'order.html';
+                link.click();
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Success</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Order Saved Successfully!</h1>
+    <p>Your order has been saved successfully. You can track the progress of your order by clicking the link below.</p>
+    <a id="trackOrderLink" href="#">Track Order Progress</a>
+
+    <script>
+        // Get the credentials_id from the URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const credentialsId = urlParams.get('credentials_id');
+
+        // Update the link with the actual credentials_id
+        if (credentialsId) {
+            document.getElementById('trackOrderLink').href = `update_progress.php?credentials_id=${credentialsId}`;
+        } else {
+            document.getElementById('trackOrderLink').textContent = "Error: No credentials ID found.";
+        }
+
+        // Redirect to the update_progress.php automatically
+        if (credentialsId) {
+            window.location.href = `update_progress.php?credentials_id=${credentialsId}`;
+        }
+    </script>
+</body>
+</html>
+-->
+
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Success</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Order Saved Successfully!</h1>
+    <p>Your order has been saved successfully. You can track the progress of your order by clicking the link below.</p>
+    <a id="trackOrderLink" href="#">Track Order Progress</a>
+
+    <script>
+        // Get the credentials_id from the URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const credentialsId = urlParams.get('credentials_id');
+
+        // Update the link with the actual credentials_id
+        if (credentialsId) {
+            const trackOrderLink = document.getElementById('trackOrderLink');
+            trackOrderLink.href = `update_progress.php?credentials_id=${credentialsId}`;
+        } else {
+            const trackOrderLink = document.getElementById('trackOrderLink');
+            trackOrderLink.textContent = "Error: No credentials ID found.";
+        }
+    </script>
+</body>
+</html>
+-->
+
+
+
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Success</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Order Saved Successfully!</h1>
+    <p>Your order has been saved successfully. Below is your credentials ID, which you can use to track the progress of your order:</p>
+    
+    <p><strong>Credentials ID:</strong> <span id="credentialsId">Loading...</span></p>
+    
+    <p>You can track the progress of your order by clicking the link below:</p>
+    <a id="trackOrderLink" href="#">Track Order Progress</a>
+    
+    
+    <p><strong>Important:</strong> To keep tracking your order progress, you need to save the following secret link. If you forget it, you will no longer be able to track your order progress. Download the link to keep it safe:</p>
+    <p id="secretLinkText">Loading...</p>
+    <button id="downloadLinkButton">Download Link</button>
+
+    <script>
+        // Get the credentials_id from the URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const credentialsId = urlParams.get('credentials_id');
+
+        // Elements
+        const credentialsIdElement = document.getElementById('credentialsId');
+        const trackOrderLink = document.getElementById('trackOrderLink');
+        const secretLinkText = document.getElementById('secretLinkText');
+        const downloadLinkButton = document.getElementById('downloadLinkButton');
+
+        if (credentialsId) {
+            const link = `http://ip_address_of_the_server/ecommerce10/client_side/update_progress.php?credentials_id=${credentialsId}`;
+            credentialsIdElement.textContent = credentialsId;
+            trackOrderLink.href = `update_progress.php?credentials_id=${credentialsId}`;
+            secretLinkText.textContent = `Your secret link: ${link}`;
+            
+            // Download the link text as a file
+            downloadLinkButton.addEventListener('click', () => {
+                const blob = new Blob([`To keep tracking your order progress, you need to save the following secret link. If you forget it, you will no longer be able to track your order progress.\n\n${link}`], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'order_tracking_link.txt';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            });
+        } else {
+            credentialsIdElement.textContent = "Error: No credentials ID found.";
+            trackOrderLink.textContent = "Error: Unable to track order progress.";
+            trackOrderLink.href = "#";
+            secretLinkText.textContent = "";
+            downloadLinkButton.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Success</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Order Saved Successfully!</h1>
+    <p>Your order has been saved successfully. Below is your credentials ID, which you can use to track the progress of your order:</p>
+    
+    <p><strong>Credentials ID:</strong> <span id="credentialsId">Loading...</span></p>
+    
+    <p>You can track the progress of your order by clicking the link below:</p>
+    <a id="trackOrderLink" href="#">Track Order Progress</a>
+    
+    <!-- New Section for Secret Link and Download Button -->
+    <p><strong>Important:</strong> To keep tracking your order progress, you need to save the following secret link. If you forget it, you will no longer be able to track your order progress. Download the link to keep it safe:</p>
+    <p id="secretLinkText">Loading...</p>
+    <button id="downloadLinkButton">Download Link</button>
+
+    <script>
+        // Get the credentials_id from the URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const credentialsId = urlParams.get('credentials_id');
+
+        // Elements
+        const credentialsIdElement = document.getElementById('credentialsId');
+        const trackOrderLink = document.getElementById('trackOrderLink');
+        const secretLinkText = document.getElementById('secretLinkText');
+        const downloadLinkButton = document.getElementById('downloadLinkButton');
+
+        // Function to get the server IP address
+        async function getServerIp() {
+            try {
+                const response = await fetch('get_ip.php');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return await response.text();
+            } catch (error) {
+                console.error('There has been a problem with your fetch operation:', error);
+                return null;
+            }
+        }
+
+        if (credentialsId) {
+            getServerIp().then(ip => {
+                if (ip) {
+                    const link = `http://${ip}/ecommerce10/client_side/update_progress.php?credentials_id=${credentialsId}`;
+                    credentialsIdElement.textContent = credentialsId;
+                    trackOrderLink.href = `update_progress.php?credentials_id=${credentialsId}`;
+                    secretLinkText.textContent = `Your secret link: ${link}`;
+                    
+                    // Download the link text as a file
+                    downloadLinkButton.addEventListener('click', () => {
+                        const blob = new Blob([`To keep tracking your order progress, you need to save the following secret link. If you forget it, you will no longer be able to track your order progress.\n\n${link}`], { type: 'text/plain' });
+                        const url = URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = 'order_tracking_link.txt';
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        URL.revokeObjectURL(url);
+                    });
+                } else {
+                    credentialsIdElement.textContent = "Error: Unable to get server IP.";
+                    trackOrderLink.textContent = "Error: Unable to track order progress.";
+                    trackOrderLink.href = "#";
+                    secretLinkText.textContent = "";
+                    downloadLinkButton.style.display = 'none';
+                }
+            });
+        } else {
+            credentialsIdElement.textContent = "Error: No credentials ID found.";
+            trackOrderLink.textContent = "Error: Unable to track order progress.";
+            trackOrderLink.href = "#";
+            secretLinkText.textContent = "";
+            downloadLinkButton.style.display = 'none';
+        }
+    </script>
+</body>
+</html>

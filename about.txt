@@ -1,0 +1,7 @@
+be carefully the client wont receive the correct path in order_success.html 
+file because the path we gave him is this one:
+http:/server's IP_address/ecommerce10/client_side/update_progress.php and 
+then his credential id
+
+so if you change the directory of your project you must change it in the code
+(order_success.html) as well
